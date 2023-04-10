@@ -10,7 +10,7 @@ type Props= {
     }
 export function HomeHeroCategories({categories}: Props){
     return(
-        <Grid templateColumns='540px 255px 255px' templateRows='200px 260px' gap={2}>
+        <Grid templateColumns='540px 255px 255px' templateRows='200px 260px' gap='30px'>
             {categories.map((cat, key)=>{
             //funcion para sustituir el ' de la categoria y poder usar el nombre de la imagen
             const slug = slugify(cat)

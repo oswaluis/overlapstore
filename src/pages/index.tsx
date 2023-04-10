@@ -4,6 +4,11 @@ import {Header} from '../components/Header'
 import { TopBar } from '@/components/TopBar';
 import { HomeHeroCategories } from '@/components/HomeHeroCategories';
 import { Categories } from './models/Categories';
+import { Box, Container, Flex } from '@chakra-ui/react';
+import { AdvantageItem } from '@/components/AdvantageItem';
+import { faTruck, faDesktop, faUndo } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon as FaIcon } from  '@fortawesome/react-fontawesome';
+
 
 type Product={
   id: number;
@@ -34,16 +39,39 @@ export default function Home({products, categories}: Props) {
       </Head>
       <main>
         <TopBar/>
-        <Header/>
-        <HomeHeroCategories categories={categories}></HomeHeroCategories>
+        <Box marginBottom='2rem'>
+          <Header/>
+        </Box>
+        <Container size='lg'>
+          <HomeHeroCategories categories={categories}></HomeHeroCategories>
+          <Flex gap='2rem' justifyContent='space-between ' margin='2rem 0 '>
+            <AdvantageItem
+                title='Envio Gratis'
+                content='Para ordenes mayores a $10.000'
+                icon={faTruck}
+                >
+            </AdvantageItem>
+            <AdvantageItem
+                title='Reembolso'
+                content='10 dias para regresar tu compra'
+                icon={faUndo} 
+                >
+            </AdvantageItem>
+            <AdvantageItem
+                title='Soporte'
+                content='soporte las 24 hs'
+                icon={faDesktop}
+                >
+            </AdvantageItem>
 
-        
+          </Flex >
+        </Container>
+
         {/* <ol>
           {products.map(product =>{
             return <li key={product.id}>{product.title}</li>
         })}
         </ol> */}
-
       </main>
     </>
   )

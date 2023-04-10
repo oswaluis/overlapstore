@@ -10,6 +10,30 @@ import '@fontsource/spartan/700.css'
 
 import { defineStyleConfig } from '@chakra-ui/react'
 
+import { defineStyle } from '@chakra-ui/react'
+
+// define custom sizes
+const sizes = {
+  sm: defineStyle({
+    maxW: '45ch',
+    p: '4',
+  }),
+  md: defineStyle({
+    maxW: 'container.sm',
+    p: '6',
+    fontSize: 'lg',
+  }),
+  lg: defineStyle({
+    maxW: '1110px',
+    p: '0'
+  }),
+}
+
+// export the component theme
+export const containerTheme = defineStyleConfig({ sizes })
+
+
+
 export const buttonTheme = defineStyleConfig({
   baseStyle:{
     textTransform:'uppercase'
@@ -37,7 +61,8 @@ const theme = extendTheme({
     body: `"Spartan", sans-serif`,
   },
   components:{
-    Button : buttonTheme
+    Button : buttonTheme,
+    Container : containerTheme
   }
 })
 
