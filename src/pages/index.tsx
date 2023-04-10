@@ -1,10 +1,9 @@
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head'
-import { Button, Grid, GridItem } from '@chakra-ui/react'
 import {Header} from '../components/Header'
 import { TopBar } from '@/components/TopBar';
-import { slugify } from '@/utils/slugify';
-import Image from 'next/image';
+import { HomeHeroCategories } from '@/components/HomeHeroCategories';
+import { Categories } from './models/Categories';
 
 type Product={
   id: number;
@@ -18,7 +17,6 @@ type Product={
     rate: number;
   }
 }
-type Categories = "electronics"|"jewelery"|"men's clothing"|"women's clothing";
 
 type Props= {
   products: Product[],
@@ -37,19 +35,7 @@ export default function Home({products, categories}: Props) {
       <main>
         <TopBar/>
         <Header/>
-        <Grid templateColumns='540px 255px 255px' templateRows='200px 260px' gap={2}>
-          {categories.map((cat, key)=>{
-            const slug = slugify(cat)
-            const imageUrl = `/pic-categories-${slug}.jpg`
-            if(key == 0){
-              return <GridItem position='relative' rowSpan={2} w='100%' h='100%' bg='#46BBc0'><Image src={imageUrl} fill={true}  alt={cat}/></GridItem>
-            }
-            if(key ==categories.length-1){
-              return <GridItem position='relative' colSpan={2} w='100%' h='100%' bg='#46BBc0'><Image src={imageUrl} fill={true} alt={cat}/></GridItem>
-            }
-            return <GridItem position='relative' width='100%' h='100%' bg='#46BBc0' key={key}><Image src={imageUrl} fill={true} alt={cat}/></GridItem>
-          })}
-        </Grid>
+        <HomeHeroCategories categories={categories}></HomeHeroCategories>
 
         
         {/* <ol>
