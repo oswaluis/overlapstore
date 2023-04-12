@@ -15,7 +15,7 @@ type Product={
   price: number;
   description: string;
   category: string;
-  imag: string;
+  image: any;
   rating:{
     count:number;
     rate: number;

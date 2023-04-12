@@ -11,8 +11,8 @@ export function TopBar(){
             <Container as={Flex}  color='#121212' justifyContent={'space-between'} fontSize='xs' size='lg'>
                 <Flex gap='1.5rem'>
                     <Flex as={Link} href='#' alignItems='center' gap='0.5rem'><FaPhone/>+58 9 11 12345678</Flex>
-                    <Flex as={Link} href='#' alignItems='center' gap='0.5rem'><FaLocationArrow/> Argentina, casa de Cesar</Flex>
-                    <Flex as={Link} href='#' alignItems='center' gap='0.5rem'><FaClock/> Lunes a Sabado 8:00 - 20:00</Flex>
+                    <Flex as={Link} display={{base:'none', sm:'flex'}} href='#' alignItems='center' gap='0.5rem'><FaLocationArrow/> Argentina, casa de Cesar</Flex>
+                    <Flex as={Link} display={{base:'none', sm:'flex'}} href='#' alignItems='center' gap='0.5rem'><FaClock/> Lunes a Sabado 8:00 - 20:00</Flex>
                 </Flex>
                 <Flex gap='0.5rem'>
                     <Link href='#'><FaFacebook/></Link>
