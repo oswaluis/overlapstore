@@ -1,5 +1,4 @@
-import { Grid, GridItem, Text } from "@chakra-ui/react";
-import { IconType } from 'react-icons';
+import { Grid, GridItem, Show, Text } from "@chakra-ui/react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
@@ -11,13 +10,23 @@ type Props = {
 }
 export function AdvantageItem({title, content, icon} : Props){
     return(
-    <Grid gridTemplateColumns='40px 1fr' gap='1rem' alignItems='center'>
+    <Grid gridTemplateColumns={{
+        base:'1fr',
+        sm: '40px 1fr'
+    }}
+    gap={{
+        base: '1rem',
+        sm: '0.5rem'
+    }} 
+    alignItems='center' justifyItems='center' margin='0 0.5rem'>
         <GridItem>
-            <FontAwesomeIcon icon={icon}/>
+            <FontAwesomeIcon icon={icon} width='40px'/>
         </GridItem>
         <GridItem>
             <Text textTransform='uppercase' fontSize='xs' fontWeight='bold'>{title}</Text>
-            <Text>{content}</Text>                
+            <Show above="sm">
+                <Text>{content}</Text> 
+            </Show>
         </GridItem>
     </Grid>
     )

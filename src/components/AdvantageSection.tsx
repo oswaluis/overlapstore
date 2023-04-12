@@ -5,7 +5,7 @@ import { faDesktop, faTruck, faUndo } from "@fortawesome/free-solid-svg-icons";
 
 export function AdvantageSection (){
     return(
-        <Flex gap='2rem' justifyContent='space-between ' margin='2rem 0 '>
+        <Flex gap='2rem' justifyContent='space-between ' margin='2rem 0 ' w='100%'>
             <AdvantageItem
                 title='Envio Gratis'
                 content='Para ordenes mayores a $10.000'
