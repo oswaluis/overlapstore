@@ -6,11 +6,11 @@ import { Product } from "@/pages";
 
 export function ProductCard({image, title, price, rating} : Product) {
     return(
-        <Box margin='2rem auto' border='solid 1px #000' position='relative'>
+        <Box width='100%' border='solid 1px' borderColor={"gray.100"} position='relative'>
             <AspectRatio position='relative' ratio={1} maxWidth='100%'>
             <Image src={image} alt='' fill={true} style={{objectFit:'contain'}}></Image>
             </AspectRatio>
-            <Text textAlign='center' margin='1rem' color={'gray.600'}>{title}</Text>
+            <Text textAlign='center' margin='1rem' color={'gray.600'} noOfLines={2}>{title}</Text>
             <Flex alignItems='center' justifyContent={'space-between'} margin={'0 0.5rem'}>
                 <Text fontWeight={'bold'} >$ {price}</Text>
             <Flex>

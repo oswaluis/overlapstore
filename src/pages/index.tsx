@@ -41,13 +41,11 @@ export default function Home({products, categories}: Props) {
         <Box marginBottom='2rem'>
           <Header/>
         </Box>
-        <Container size={{
-          lg:'lg'
-        }}>
+        <Container size={{ lg:'lg' }}>
           <HomeHeroCategories categories={categories}></HomeHeroCategories>
           <AdvantageSection/>
-        </Container>
           <ProductSection products={products} categories={[]}/>
+        </Container>
         
       </main>
     </>

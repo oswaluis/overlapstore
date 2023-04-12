@@ -4,9 +4,9 @@ import { SimpleGrid } from '@chakra-ui/react';
 
 export function ProductSection({products}: Props){
     return(
-        <SimpleGrid as='ol' minChildWidth='160px' listStyleType='none' gap={1}>
+        <SimpleGrid  minChildWidth='255px' listStyleType='none' spacing='1.86rem' >
                 {products.map(product =>{
-                return <li key={product.id} ><ProductCard {...product}/></li>
+                return <ProductCard {...product} key={product.id} />
                     })}
         </SimpleGrid>
     
