@@ -4,25 +4,25 @@ import {Header} from '../components/Header'
 import { TopBar } from '@/components/TopBar';
 import { HomeHeroCategories } from '@/components/HomeHeroCategories';
 import { Categories } from './models/Categories';
-import { AspectRatio, Box, Container, Flex, Text } from '@chakra-ui/react';
+import { Box, Container, SimpleGrid} from '@chakra-ui/react';
 import { AdvantageSection } from '@/components/AdvantageSection';
-import Image from 'next/image';
+import { ProductSection } from '@/components/ProductSection';
 
 
-type Product={
+export type Product={
   id: number;
   title: string;
   price: number;
   description: string;
   category: string;
-  image: any;
+  image: string;
   rating:{
     count:number;
     rate: number;
   }
 }
 
-type Props= {
+export type Props= {
   products: Product[],
   categories : Categories[]
 }
@@ -41,24 +41,14 @@ export default function Home({products, categories}: Props) {
         <Box marginBottom='2rem'>
           <Header/>
         </Box>
-        <Container size='lg'>
+        <Container size={{
+          lg:'lg'
+        }}>
           <HomeHeroCategories categories={categories}></HomeHeroCategories>
           <AdvantageSection/>
         </Container>
-
-        <Box margin='2rem auto' width='255px' border='solid 1px #000' position='relative'>
-          <AspectRatio position='relative' ratio={1} maxWidth='100%'>
-            <Image src="https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg" alt='' fill={true} style={{objectFit:'contain'}}></Image>
-          </AspectRatio>
-          <Text textAlign='center' margin='1rem'>Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops </Text>
-          <Text margin='1rem' textAlign='center'>$ 109.95</Text>
-        </Box>
-
-        <ol>
-          {products.map(product =>{
-            return <li key={product.id}>{product.title}</li>
-        })}
-        </ol>
+          <ProductSection products={products} categories={[]}/>
+        
       </main>
     </>
   )

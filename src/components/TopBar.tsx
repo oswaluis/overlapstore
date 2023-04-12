@@ -8,7 +8,11 @@ import { Flex, Spacer } from '@chakra-ui/react'
 export function TopBar(){
     return(
         <Box bg='#46BBC0' w='100%' p={2}>
-            <Container as={Flex}  color='#121212' justifyContent={'space-between'} fontSize='xs' size='lg'>
+            <Container as={Flex}  color='#121212' justifyContent={'space-between'} fontSize='xs' 
+            maxW={{
+                base: '100%',
+                md: '1110px'
+            }}>
                 <Flex gap='1.5rem'>
                     <Flex as={Link} href='#' alignItems='center' gap='0.5rem'><FaPhone/>+58 9 11 12345678</Flex>
                     <Flex as={Link} display={{base:'none', sm:'flex'}} href='#' alignItems='center' gap='0.5rem'><FaLocationArrow/> Argentina, casa de Cesar</Flex>
