@@ -1,37 +1,42 @@
-import { GetServerSidePropsContext } from 'next';
-import Head from 'next/head'
-import {Header} from '../components/Header'
-import { TopBar } from '@/components/TopBar';
-import { HomeHeroCategories } from '@/components/HomeHeroCategories';
-import { Categories } from './models/Categories';
-import { Box, Container, Grid, Heading, SimpleGrid} from '@chakra-ui/react';
-import { AdvantageSection } from '@/components/AdvantageSection';
-import { ProductSection } from '@/components/ProductSection';
-import { GroupedProducts, groupProductsByCategory } from '@/utils/groupProductsByCategory';
-import Image from 'next/image';
-import banner1 from '/public/pic-categories-mens-clothing.jpg'
-import banner2 from '/public/pic-categories-jewelery.jpg'
+import { GetServerSidePropsContext } from "next";
+import Head from "next/head";
+import { Header } from "../components/Header";
+import { TopBar } from "@/components/TopBar";
+import { HomeHeroCategories } from "@/components/HomeHeroCategories";
+import { Categories } from "./models/Categories";
+import { Box, Container, Heading } from "@chakra-ui/react";
+import { AdvantageSection } from "@/components/AdvantageSection";
+import { ProductSection } from "@/components/ProductSection";
+import {
+  GroupedProducts,
+  groupProductsByCategory,
+} from "@/utils/groupProductsByCategory";
+import { BannerSection } from "@/components/BannerSection";
 
-export type Product={
+export type Product = {
   id: number;
   title: string;
   price: number;
   description: string;
   category: string;
   image: string;
-  rating:{
-    count:number;
+  rating: {
+    count: number;
     rate: number;
-  }
-}
+  };
+};
 
-export type Props= {
-  products: Product[],
-  categories : Categories[],
-  productsGroupedByCategory : GroupedProducts;
-}
+export type Props = {
+  products: Product[];
+  categories: Categories[];
+  productsGroupedByCategory: GroupedProducts;
+};
 
-export default function Home({products, categories, productsGroupedByCategory}: Props) {
+export default function Home({
+  products,
+  categories,
+  productsGroupedByCategory,
+}: Props) {
   return (
     <>
       <Head>
@@ -41,69 +46,75 @@ export default function Home({products, categories, productsGroupedByCategory}: 
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <TopBar/>
-        <Box marginBottom='2rem'>
-          <Header/>
+        <TopBar />
+        <Box marginBottom="2rem">
+          <Header />
         </Box>
-        <Container size={{ lg:'lg' }}>
+        <Container size={{ lg: "lg" }}>
           <HomeHeroCategories categories={categories}></HomeHeroCategories>
-          <AdvantageSection/>
+          <AdvantageSection />
         </Container>
         <Container
           maxWidth={{
-            base:'100%',
-            md:'1110px'
+            base: "100%",
+            md: "1110px",
           }}
-          padding={0}>
+          padding={0}
+        >
           {/* <ProductSection products={products} categories={[]} productsGroupedByCategory={productsGroupedByCategory} /> */}
-          {Object.entries(productsGroupedByCategory).map(([category, products])=>{
-            return(
-              <Box key={category} marginBottom='4rem'>
-                <Heading as='h2' size='md' textTransform='uppercase'
-                  margin={{
-                    base: '0 0 1rem 1rem',
-                    md: '0 0 2rem 0'
-                }}>{category}</Heading>
-                <ProductSection products={products} categories={[]} productsGroupedByCategory={productsGroupedByCategory}/>
-              </Box> 
-            )
-          })}
+          {Object.entries(productsGroupedByCategory).map(
+            ([category, products]) => {
+              return (
+                <Box key={category} marginBottom="4rem">
+                  <Heading
+                    as="h2"
+                    size="md"
+                    textTransform="uppercase"
+                    margin={{
+                      base: "0 0 1rem 1rem",
+                      md: "0 0 2rem 0",
+                    }}
+                  >
+                    {category}
+                  </Heading>
+                  <ProductSection
+                    products={products}
+                    categories={[]}
+                    productsGroupedByCategory={productsGroupedByCategory}
+                  />
+                </Box>
+              );
+            }
+          )}
         </Container>
         <Container
           maxWidth={{
-            base:'100%',
-            md:'1110px'
-          }}>
-            <SimpleGrid minChildWidth='255px' 
-              spacing={{
-                base: '1rem',
-                md: '2rem'
-              }}>
-              <Image src={banner1} alt='' />
-              <Image src={banner2} alt='' />
-            </SimpleGrid>
-          </Container>
-        
+            base: "100%",
+            md: "1110px",
+          }}
+        >
+          <BannerSection></BannerSection>
+        </Container>
       </main>
     </>
-  )
+  );
 }
 
-export async function getServerSideProps(context : GetServerSidePropsContext){
-  
-  const products = await fetch('https://fakestoreapi.com/products')
-                        .then(res=>res.json())
-  const categories = await fetch('https://fakestoreapi.com/products/categories')
-                        .then(res=>res.json())
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const products = await fetch("https://fakestoreapi.com/products").then(
+    (res) => res.json()
+  );
+  const categories = await fetch(
+    "https://fakestoreapi.com/products/categories"
+  ).then((res) => res.json());
 
   const productsGroupedByCategory = groupProductsByCategory(products);
 
-  return{
+  return {
     props: {
       products,
       categories,
-      productsGroupedByCategory
-    }
-    
-  }
+      productsGroupedByCategory,
+    },
+  };
 }
