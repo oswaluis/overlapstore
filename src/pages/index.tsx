@@ -4,11 +4,13 @@ import {Header} from '../components/Header'
 import { TopBar } from '@/components/TopBar';
 import { HomeHeroCategories } from '@/components/HomeHeroCategories';
 import { Categories } from './models/Categories';
-import { Box, Container, Heading, SimpleGrid} from '@chakra-ui/react';
+import { Box, Container, Grid, Heading, SimpleGrid} from '@chakra-ui/react';
 import { AdvantageSection } from '@/components/AdvantageSection';
 import { ProductSection } from '@/components/ProductSection';
 import { GroupedProducts, groupProductsByCategory } from '@/utils/groupProductsByCategory';
-
+import Image from 'next/image';
+import banner1 from '/public/pic-categories-mens-clothing.jpg'
+import banner2 from '/public/pic-categories-jewelery.jpg'
 
 export type Product={
   id: number;
@@ -62,13 +64,25 @@ export default function Home({products, categories, productsGroupedByCategory}: 
                     base: '0 0 1rem 1rem',
                     md: '0 0 2rem 0'
                 }}>{category}</Heading>
-                <ProductSection products={products}/>
+                <ProductSection products={products} categories={[]} productsGroupedByCategory={productsGroupedByCategory}/>
               </Box> 
             )
           })}
         </Container>
-          
-        
+        <Container
+          maxWidth={{
+            base:'100%',
+            md:'1110px'
+          }}>
+            <SimpleGrid minChildWidth='255px' 
+              spacing={{
+                base: '1rem',
+                md: '2rem'
+              }}>
+              <Image src={banner1} alt='' />
+              <Image src={banner2} alt='' />
+            </SimpleGrid>
+          </Container>
         
       </main>
     </>
