@@ -6,7 +6,7 @@ import { Product } from "@/pages";
 
 export function ProductCard({image, title, price, rating} : Product) {
     return(
-        <Box width='100%' border='solid 1px' borderColor={"gray.100"} position='relative'>
+        <Box width='100%' position='relative'>
             <AspectRatio position='relative' ratio={1} maxWidth='100%'>
             <Image src={image} alt='' fill={true} style={{objectFit:'contain'}}></Image>
             </AspectRatio>

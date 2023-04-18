@@ -4,9 +4,10 @@ import {Header} from '../components/Header'
 import { TopBar } from '@/components/TopBar';
 import { HomeHeroCategories } from '@/components/HomeHeroCategories';
 import { Categories } from './models/Categories';
-import { Box, Container, SimpleGrid} from '@chakra-ui/react';
+import { Box, Container, Heading, SimpleGrid} from '@chakra-ui/react';
 import { AdvantageSection } from '@/components/AdvantageSection';
 import { ProductSection } from '@/components/ProductSection';
+import { GroupedProducts, groupProductsByCategory } from '@/utils/groupProductsByCategory';
 
 
 export type Product={
@@ -24,10 +25,11 @@ export type Product={
 
 export type Props= {
   products: Product[],
-  categories : Categories[]
+  categories : Categories[],
+  productsGroupedByCategory : GroupedProducts;
 }
 
-export default function Home({products, categories}: Props) {
+export default function Home({products, categories, productsGroupedByCategory}: Props) {
   return (
     <>
       <Head>
@@ -44,8 +46,29 @@ export default function Home({products, categories}: Props) {
         <Container size={{ lg:'lg' }}>
           <HomeHeroCategories categories={categories}></HomeHeroCategories>
           <AdvantageSection/>
-          <ProductSection products={products} categories={[]}/>
         </Container>
+        <Container
+          maxWidth={{
+            base:'100%',
+            md:'1110px'
+          }}
+          padding={0}>
+          {/* <ProductSection products={products} categories={[]} productsGroupedByCategory={productsGroupedByCategory} /> */}
+          {Object.entries(productsGroupedByCategory).map(([category, products])=>{
+            return(
+              <Box key={category} marginBottom='4rem'>
+                <Heading as='h2' size='md' textTransform='uppercase'
+                  margin={{
+                    base: '0 0 1rem 1rem',
+                    md: '0 0 2rem 0'
+                }}>{category}</Heading>
+                <ProductSection products={products}/>
+              </Box> 
+            )
+          })}
+        </Container>
+          
+        
         
       </main>
     </>
@@ -59,11 +82,13 @@ export async function getServerSideProps(context : GetServerSidePropsContext){
   const categories = await fetch('https://fakestoreapi.com/products/categories')
                         .then(res=>res.json())
 
+  const productsGroupedByCategory = groupProductsByCategory(products);
+
   return{
     props: {
       products,
-      categories
-      
+      categories,
+      productsGroupedByCategory
     }
     
   }
