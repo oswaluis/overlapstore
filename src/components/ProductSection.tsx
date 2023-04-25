@@ -1,6 +1,8 @@
 import { ProductCard } from "@/components/ProductCard";
 import { Props } from "@/pages";
-import { Box, Grid, SimpleGrid } from "@chakra-ui/react";
+import { slugify } from "@/utils/slugify";
+import { Box, Grid } from "@chakra-ui/react";
+import Link from "next/link";
 
 export function ProductSection({ products }: Props) {
   return (
@@ -15,12 +17,17 @@ export function ProductSection({ products }: Props) {
         base: "column",
         md: "row",
       }}
-      overflowX={"scroll"}
-      scrollBehavior={"smooth"}
-      scrollSnapType={"x mandatory"}
-      scrollSnapStop={"always"}
+      alignItems="stretch"
+      gridAutoRows="1fr"
+      overflowX={{
+        base: "scroll",
+        md: "hidden",
+      }}
+      scrollSnapType="x mandatory"
+      scrollSnapStop="always"
     >
       {products.map((product, i) => {
+        const slug = slugify(product.title);
         return (
           <Box
             key={product.id}
@@ -32,7 +39,9 @@ export function ProductSection({ products }: Props) {
             borderColor={"gray.100"}
             scrollSnapAlign={"center"}
           >
-            <ProductCard {...product} />
+            <Link href={`/products/${slug}-${product.id}`}>
+              <ProductCard {...product} />
+            </Link>
           </Box>
         );
       })}

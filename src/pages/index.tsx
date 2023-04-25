@@ -1,19 +1,11 @@
 import { GetServerSidePropsContext } from "next";
+import Image from "next/image";
 import Head from "next/head";
 import { Header } from "../components/Header";
 import { TopBar } from "@/components/TopBar";
 import { HomeHeroCategories } from "@/components/HomeHeroCategories";
 import { Categories } from "./models/Categories";
-import {
-  Box,
-  Button,
-  Container,
-  FormControl,
-  Text,
-  Heading,
-  Input,
-  Grid,
-} from "@chakra-ui/react";
+import { Box, Container, Heading } from "@chakra-ui/react";
 import { AdvantageSection } from "@/components/AdvantageSection";
 import { ProductSection } from "@/components/ProductSection";
 import {
@@ -21,6 +13,7 @@ import {
   groupProductsByCategory,
 } from "@/utils/groupProductsByCategory";
 import { BannerSection } from "@/components/BannerSection";
+import { RegistrationSection } from "@/components/RegistrationSection";
 
 export type Product = {
   id: number;
@@ -59,7 +52,7 @@ export default function Home({
         <Box marginBottom="2rem">
           <Header />
         </Box>
-        <Container size={{ lg: "lg" }}>
+        <Container>
           <HomeHeroCategories categories={categories}></HomeHeroCategories>
           <AdvantageSection />
         </Container>
@@ -104,49 +97,7 @@ export default function Home({
         >
           <BannerSection></BannerSection>
         </Container>
-        <Container
-          background={"linear-gradient(180deg, #f3f2f2 0%, #46BBC0 100%)"}
-          m="2rem 0"
-          p="1.5rem"
-          maxW="100%"
-        >
-          <Box as="article" bgColor="#FFF" p="2rem" maxW="33rem" margin="auto">
-            <Grid maxW="22rem" margin="auto" textAlign="center" gap="2rem">
-              <header>
-                <Heading size="xs" textTransform="uppercase" color="#46BBC0">
-                  Promo usuario nuevo
-                </Heading>
-                <Heading size="xl" textTransform="uppercase">
-                  Registrate y obten{" "}
-                  <Text as="span" color="red">
-                    10% en tu primera compra
-                  </Text>
-                </Heading>
-              </header>
-              <Grid as="form" action="" gap="1.5rem">
-                <FormControl>
-                  <Input
-                    height="4rem"
-                    type="email"
-                    placeholder="Email"
-                    textAlign="inherit"
-                    borderRadius="0"
-                    bgColor="gray.100"
-                  ></Input>
-                </FormControl>
-                <Button
-                  size="lg"
-                  width="100%"
-                  h="4rem"
-                  borderRadius="0"
-                  bgColor="#46BBC0"
-                >
-                  Registrate
-                </Button>
-              </Grid>
-            </Grid>
-          </Box>
-        </Container>
+        <RegistrationSection />
       </main>
     </>
   );
