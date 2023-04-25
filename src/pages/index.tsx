@@ -48,10 +48,6 @@ export default function Home({
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <TopBar />
-        <Box marginBottom="2rem">
-          <Header />
-        </Box>
         <Container>
           <HomeHeroCategories categories={categories}></HomeHeroCategories>
           <AdvantageSection />

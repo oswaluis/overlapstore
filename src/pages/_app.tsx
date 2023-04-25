@@ -1,5 +1,5 @@
 import type { AppProps } from "next/app";
-import { ChakraProvider, background } from "@chakra-ui/react";
+import { Box, ChakraProvider, background } from "@chakra-ui/react";
 
 import { extendTheme } from "@chakra-ui/react";
 
@@ -9,6 +9,8 @@ import "@fontsource/spartan/700.css";
 import { defineStyleConfig } from "@chakra-ui/react";
 
 import { defineStyle } from "@chakra-ui/react";
+import { TopBar } from "@/components/TopBar";
+import { Header } from "@/components/Header";
 
 // define custom sizes
 // const sizes = {
@@ -100,6 +102,10 @@ const theme = extendTheme({
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider theme={theme}>
+      <TopBar />
+      <Box marginBottom="2rem">
+        <Header />
+      </Box>
       <Component {...pageProps} />
     </ChakraProvider>
   );
