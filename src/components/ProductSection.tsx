@@ -36,7 +36,7 @@ export function ProductSection({ products }: Props) {
               md: "0",
             }}
             border="solid 1px"
-            borderColor={"gray.100"}
+            borderColor={"#46BBC0"}
             scrollSnapAlign={"center"}
           >
             <Link href={`/products/${slug}-${product.id}`}>

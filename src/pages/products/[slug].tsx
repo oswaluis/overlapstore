@@ -3,112 +3,147 @@ import Image from "next/image";
 import { slugify } from "@/utils/slugify";
 import { Product as ProductModel } from "../index";
 import { ChevronRightIcon } from "@chakra-ui/icons";
+import Link from "next/link";
 import {
   AspectRatio,
   Box,
   Button,
   Container,
+  Divider,
   Flex,
+  Grid,
   Heading,
-  Link,
   ListIcon,
   ListItem,
   Text,
   UnorderedList,
 } from "@chakra-ui/react";
-import { Breadcrumbs } from "@/components/breadcrumbs";
+
 import { RateStar } from "@/components/RateStar";
-import { FaShareAlt } from "react-icons/fa";
+import {
+  FaBalanceScale,
+  FaBitcoin,
+  FaCcAmex,
+  FaCcMastercard,
+  FaCcVisa,
+  FaHeart,
+  FaMailBulk,
+  FaPaypal,
+  FaShareAlt,
+  FaTruck,
+  FaUndo,
+} from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
+import { PDPHeader } from "@/components/PDPHeader";
 
 // Generates `/posts/1` and `/posts/2`
 type Props = {
   product: ProductModel;
 };
+function Price({ price }: { price: number }) {
+  const currency = new Intl.NumberFormat("en-Us", {
+    style: "currency",
+    currency: "ARS",
+  }).format(price);
+  return <p>{currency} </p>;
+}
 
-export default function Product({
-  product: { id, title, price, image, rating, category, description },
-}: Props) {
+export default function Product({ product }: Props) {
+  const { price, category, description, image, id, rating, title } = product;
   return (
     <>
-      <Box bg="gray.100" padding="1rem">
-        <Container>
-          <Flex alignItems={"center"} justifyContent={"space-between"}>
-            <Flex
-              as={UnorderedList}
-              listStyleType={"none"}
-              gap={"0.5rem"}
-              fontSize={"sm"}
-            >
-              <ListItem textTransform={"capitalize"}>
-                <Link href="/">Home</Link>
-                <ListIcon
-                  as={ChevronRightIcon}
-                  ml={"0.5rem"}
-                  w={18}
-                  h={18}
-                ></ListIcon>
-              </ListItem>
-              <ListItem textTransform={"capitalize"}>
-                <Link href="{`${category}`}">{category}</Link>
-                <ListIcon
-                  as={ChevronRightIcon}
-                  ml={"0.5rem"}
-                  w={18}
-                  h={18}
-                ></ListIcon>
-              </ListItem>
-              <ListItem textTransform={"capitalize"}>
-                <Link href="">{title}</Link>
-              </ListItem>
-            </Flex>
-            <Button
-              leftIcon={<FaShareAlt width={18} height={18} />}
-              iconSpacing={"1rem"}
-              variant={"ghost"}
-              color={"#ab40c0"}
-            >
-              Share
-            </Button>
-          </Flex>
-          <Heading
-            as="h1"
-            fontSize={"2xl"}
-            textAlign={"center"}
-            margin={"1rem"}
+      <PDPHeader product={product} />
+      <Container
+        as={Grid}
+        gridTemplateColumns={"558px 1fr"}
+        gap={"2rem"}
+        mt={"2rem"}
+      >
+        <AspectRatio position="relative" ratio={1} maxWidth="100%">
+          <Image
+            src={image}
+            alt=""
+            fill={true}
+            style={{ objectFit: "contain" }}
+          ></Image>
+        </AspectRatio>
+        <Box>
+          <Text
+            fontWeight={"semibold"}
+            textTransform={"uppercase"}
+            fontSize={"md"}
+            noOfLines={2}
           >
             {title}
-          </Heading>
-
+          </Text>
+          <Text>{category}</Text>
+          <Divider variant={"color"} />
           <Flex
-            gap={"0.5rem"}
+            alignItems={"center"}
+            gap={"1.5rem"}
             justifyContent={"space-between"}
-            alignItems={"baseline"}
+            mb={"1.5rem"}
           >
-            <Box>
-              <p>
-                <Flex gap={"0.3rem"}>
-                  <RateStar rate={rating.rate} />
-                  <Text fontSize={"sm"}>/ {rating.count} reviews</Text>
-                </Flex>
-              </p>
-            </Box>
-            <Flex gap={"1rem"}>
-              <Text fontSize={"sm"}>
-                SKU : <span>{id}</span>
+            <Flex alignItems={"center"} gap={"1rem"}>
+              <Text fontWeight={"bold"} fontSize={"lg"}>
+                <Price price={price} />
               </Text>
-              <Text fontSize={"sm"}>Disponible</Text>
+              <Button>Agregar al carrito</Button>
+            </Flex>
+            <Flex gap={"1rem"}>
+              <Link href={"#"}>
+                <FaHeart color="#46BBC0" fontSize={"1.5rem"} />
+              </Link>
+              <Link href={"#"}>
+                <FaBalanceScale color="#46BBC0" fontSize={"1.5rem"} />
+              </Link>
             </Flex>
           </Flex>
-        </Container>
-      </Box>
-      <AspectRatio position="relative" ratio={1} maxWidth="100%">
-        <Image
-          src={image}
-          alt=""
-          fill={true}
-          style={{ objectFit: "contain" }}
-        ></Image>
-      </AspectRatio>
+          <Text textAlign={"justify"} fontSize={"md"}>
+            {description}
+          </Text>
+          <Divider variant={"color"} />
+          <Flex gap={"1rem"} justifyContent={"center"}>
+            <Flex as={Link} href={"#"} gap={"0.5rem"}>
+              <FaTruck fontSize={"1.5rem"} color="#46BBC0" />
+              <Text>Delivery</Text>
+            </Flex>
+            <Flex as={Link} href={"#"} gap={"0.5rem"}>
+              <FaUndo fontSize={"1.5rem"} color="#46BBC0" />
+              <Text>Devolver</Text>
+            </Flex>
+            <Flex as={Link} href={"#"} gap={"0.5rem"}>
+              <MdEmail fontSize={"1.5rem"} color="#46BBC0" />
+              <Text> Consultas</Text>
+            </Flex>
+          </Flex>
+          <Flex alignItems={"center"}>
+            <Text
+              textTransform={"uppercase"}
+              fontWeight={"semibold"}
+              whiteSpace={"nowrap"}
+              pr={"0.5rem"}
+            >
+              Pago seguro
+            </Text>
+            <Divider variant="color" />
+          </Flex>
+          <Flex
+            fontSize={"2.5rem"}
+            color={"#46BBc0"}
+            gap="1rem"
+            justifyContent={"space-evenly"}
+            my={"1rem"}
+          >
+            <FaPaypal />
+            <FaCcAmex />
+            <FaCcVisa />
+            <FaCcMastercard />
+            <FaBitcoin />
+          </Flex>
+          <Divider variant={"color"} />
+        </Box>
+      </Container>
     </>
   );
 }

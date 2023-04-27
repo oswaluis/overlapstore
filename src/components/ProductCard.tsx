@@ -2,6 +2,7 @@ import { AspectRatio, Box, Flex, Text } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
 import Image from "next/image";
 import { Product } from "@/pages";
+import { RateStar } from "./RateStar";
 
 export function ProductCard({ image, title, price, rating }: Product) {
   return (
@@ -23,13 +24,7 @@ export function ProductCard({ image, title, price, rating }: Product) {
         margin={"0 0.5rem"}
       >
         <Text fontWeight={"bold"}>$ {price}</Text>
-        <Flex>
-          <StarIcon color={"yellow.400"} />
-          <StarIcon color={"yellow.400"} />
-          <StarIcon color={"yellow.400"} />
-          <StarIcon color={"yellow.400"} />
-          <StarIcon color={"yellow.400"} />
-        </Flex>
+        <RateStar rate={rating.rate} />
       </Flex>
     </Box>
   );

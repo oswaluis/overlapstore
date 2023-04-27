@@ -71,6 +71,17 @@ export const buttonTheme = defineStyleConfig({
     },
   },
 });
+
+const dividerTheme = defineStyleConfig({
+  variants: {
+    color: {
+      borderWidth: "2px",
+      borderStyle: "solid",
+      borderColor: "#46BBc0",
+      my: "2rem",
+    },
+  },
+});
 const theme = extendTheme({
   colors: {
     brand: {
@@ -91,6 +102,7 @@ const theme = extendTheme({
   },
   components: {
     Button: buttonTheme,
+    Divider: dividerTheme,
     Container: {
       baseStyle: {
         maxW: "71.375rem",
@@ -103,7 +115,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider theme={theme}>
       <TopBar />
-      <Box marginBottom="2rem">
+      <Box>
         <Header />
       </Box>
       <Component {...pageProps} />
